@@ -1,0 +1,34 @@
+.App {
+  background-color: #222;
+  height: 100vh;
+}
+
+.slide {
+  opacity: 0.5;
+  padding: 1em;
+  font-size: 1.5em;
+  color: #eee;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.line {
+  line-height: 2.5;
+  font-family: Roboto Slab;
+}
+
+.bit {
+  position:relative;
+}
+
+.chord {
+  position: absolute;
+  top: -1.5em;
+  left: 0;
+  font-size: 92%;
+  font-weight: 900;
+  font-family: Patrick Hand;
+  color: #FFEB3B;
+}
