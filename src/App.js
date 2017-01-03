@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Motion, spring } from 'react-motion'
 import ChordFormat from 'chords-format'
-import './App.css';
+import './App.css'
 
 const chordFormat = new ChordFormat({chordTag: false})
 
@@ -75,9 +76,8 @@ class App extends Component {
               currentSlide: data.results.slide,
               offset: this.refs[data.results.slide]
             })
-            console.log(this.refs[data.results.slide].refs.wrapper.offsetTop)
             this.setState({
-              offset: this.refs[data.results.slide].refs.wrapper.offsetTop
+              offset: this.slideRefs[data.results.slide].refs.wrapper.offsetTop
             })
 
           }
@@ -92,17 +92,24 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="Slides" style={{transform: `translateY(-${this.state.offset}px)`}}>
-          {this.state.slides.map((s, i) => (
-            <Slide
-              lines={s.lines}
-              key={i}
-              index={i}
-              active={i === this.state.currentSlide}
-              ref={i}
-            />
-          ))}
-        </div>
+        <Motion
+          defaultStyle={{offset: 0}}
+          style={{offset: spring(this.state.offset, {stiffness: 150, damping: 15})}}
+        >
+          {interpolatedStyle => (
+            <div className="Slides" style={{transform: `translateY(-${interpolatedStyle.offset}px)`}}>
+              {this.state.slides.map((s, i) => (
+                <Slide
+                  lines={s.lines}
+                  key={i}
+                  index={i}
+                  active={i === this.state.currentSlide}
+                  ref={(el) => this.slideRefs[i] = el}
+                />
+              ))}
+            </div>
+          )}
+      </Motion>
       </div>
     );
   }
