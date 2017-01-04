@@ -6,12 +6,19 @@ export default class Line extends Component {
     return (
       <div className='line'>
         {this.props.bits.map((bit, i) => {
-          let chordSpan = bit.chord ? <span className='chord'>{bit.chord}</span> : null
-          let leftMargin = 0
+          let offsetMargin = 0
+          let chordSpan
           if (bit.chord !== null) {
-            leftMargin = Math.max(0, bit.chord.length - bit.text.length + 1.3)
+            chordSpan = <span className='chord'>{bit.chord}</span>
+            offsetMargin = Math.max(0, bit.chord.length - bit.text.length + 1.3)
           }
-          return <span className='bit' key={i} style={{marginRight: leftMargin + 'em'}}>{chordSpan}{bit.text}</span>
+          return (
+            <span
+              className='bit'
+              key={i}
+              style={{marginRight: offsetMargin + 'em'}}>
+              {chordSpan}{bit.text}
+            </span>)
         })}
       </div>
     )
