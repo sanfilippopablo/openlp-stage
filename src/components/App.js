@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Motion, spring } from 'react-motion'
 import ChordFormat from 'chords-format'
+import InfoPanel from './InfoPanel'
 import Slide from './Slide'
 import './App.css'
 
@@ -48,7 +49,6 @@ class App extends Component {
             this.setState({
               offset: this.slideRefs[data.results.slide].refs.wrapper.offsetTop
             })
-
           }
         })
     }, 500)
@@ -79,6 +79,7 @@ class App extends Component {
             </div>
           )}
       </Motion>
+      <InfoPanel />
       </div>
     );
   }

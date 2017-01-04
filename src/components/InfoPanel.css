@@ -1,0 +1,8 @@
+.InfoPanel {
+  display: flex;
+  width: 100%;
+  padding: 1em;
+  position: fixed;
+  bottom: 0;
+  justify-content: flex-end;
+}
