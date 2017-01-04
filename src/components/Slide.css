@@ -1,0 +1,10 @@
+.slide {
+  opacity: 0.5;
+  padding: 1em;
+  font-size: 1.5em;
+  color: #eee;
+}
+
+.slide.active {
+  opacity: 1;
+}

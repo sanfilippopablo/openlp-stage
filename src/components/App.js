@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Motion, spring } from 'react-motion'
 import ChordFormat from 'chords-format'
+import Slide from './Slide'
 import './App.css'
 
 const chordFormat = new ChordFormat({chordTag: false})
@@ -8,38 +9,6 @@ const chordFormat = new ChordFormat({chordTag: false})
 const getSlidesFromOpenLPResults = (results) => results.results.slides.map((slide) => ({
   lines: slide.text.split('\n').map((line) => chordFormat.parseLine(line))
 }))
-
-class Line extends Component {
-  render () {
-    return (
-      <div className='line'>
-        {this.props.bits.map((bit, i) => {
-          let chordSpan = bit.chord ? <span className='chord'>{bit.chord}</span> : null
-          let leftMargin = 0
-          if (bit.chord !== null) {
-            leftMargin = Math.max(0, bit.chord.length - bit.text.length + 1.3)
-          }
-          return <span className='bit' key={i} style={{marginRight: leftMargin + 'em'}}>{chordSpan}{bit.text}</span>
-        })}
-      </div>
-    )
-  }
-}
-
-class Slide extends Component {
-  defaultProps = {
-    active: false
-  }
-
-  render () {
-    const className = this.props.active ? 'slide active' : 'slide'
-    return (
-      <div className={className} ref='wrapper'>
-        {this.props.lines.map((line, i) => <Line bits={line} key={i} />)}
-      </div>
-    )
-  }
-}
 
 class App extends Component {
   constructor (props) {
@@ -52,10 +21,6 @@ class App extends Component {
       offset: 0,
       offsets: []
     }
-  }
-
-  componentDidUpdate () {
-    console.log(this.refs)
   }
 
   componentDidMount () {
